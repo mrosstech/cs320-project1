@@ -46,4 +46,40 @@ public class Contact {
 		
 		return false;
 	}
+	
+	public void setFirstName(String firstName) {
+		
+	}
+	
+	public void setLastName(String lastName) {
+		
+	}
+	
+	public void setPhone(String phone) {
+		
+	}
+	
+	public void setAddress(String address) {
+		
+	}
+	
+	public String getFirstName() {
+		return this.firstName;
+	}
+	
+	public String getLastName() {
+		return this.lastName;
+	}
+	
+	public String getPhone() {
+		return this.phone;
+	}
+	
+	public String getAddress() {
+		return this.address;
+	}
+	
+	public String getID() {
+		return this.id;
+	}
 }

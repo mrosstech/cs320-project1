@@ -11,5 +11,33 @@ public class ContactService {
 			Address
 	 */
 	
+	private Contact [] contactsDB;
+	
+	private ContactService() {
+		// This class needs to be a singleton to ensure that the IDs for the created contacts are unique.
+	}
+	
+	private static class SingletonHelper {
+		private static final ContactService INSTANCE = new ContactService();
+	}
+	
+	public static ContactService getInstance() {
+		return SingletonHelper.INSTANCE;
+	}
+	
+	public boolean addContact(String firstName, String lastName, String phone, String address) {
+		
+		return false;
+	}
+	
+	public boolean updateContact(String ID, String firstName, String lastName, String phone, String address) {
+		
+		return false;
+	}
+	
+	public boolean deleteContact(String ID) {
+		
+		return false;
+	}
 	
 }
