@@ -17,11 +17,18 @@ public class Contact {
 	
 	// Class constructors
 	public Contact(String thisId, String thisFirstName, String thisLastName, String thisPhone, String thisAddress) {
-		
+		this.setFirstName(thisFirstName);
+		this.setLastName(thisLastName);
+		this.setPhone(thisPhone);
+		this.setAddress(thisAddress);
 	}
 	
 	public Contact() {
-		
+		this.id = "";
+		this.firstName = "";
+		this.lastName = "";
+		this.phone = "";
+		this.address = "";
 	}
 	
 	private boolean checkId(String thisId) {
@@ -48,19 +55,37 @@ public class Contact {
 	}
 	
 	public void setFirstName(String firstName) {
-		
+		if (firstName == null) {
+			firstName = " ";
+		}
+		this.firstName = firstName.substring(0,Math.min(firstName.length(), 10));
 	}
 	
 	public void setLastName(String lastName) {
-		
+		if (lastName == null) {
+			lastName = "";
+		}
+		this.lastName = lastName.substring(0,Math.min(lastName.length(), 10));;
 	}
 	
 	public void setPhone(String phone) {
-		
+		if (phone == null) {
+			phone = "";
+		}
+		if (phone.length() > 10) {
+			this.phone = phone.substring(0, 10);
+		} else if (phone.length() < 10) {
+			this.phone = this.padRight(phone, 10);
+		} else {
+			this.phone = phone;
+		}
 	}
 	
 	public void setAddress(String address) {
-		
+		if (address == null) {
+			address = "";
+		}
+		this.address = address.substring(0, Math.min(address.length(), 30));
 	}
 	
 	public String getFirstName() {
@@ -81,5 +106,9 @@ public class Contact {
 	
 	public String getID() {
 		return this.id;
+	}
+	
+	private String padRight(String s, int n) {
+		return String.format("%1$" + n + "s", s).replace(" ", "*");
 	}
 }
