@@ -24,7 +24,7 @@ public class ContactService {
 		// This class needs to be a singleton to ensure that the IDs for the created contacts are unique.
 	}
 	
-	private static class SingletonHelper {
+	public static class SingletonHelper {
 		private static final ContactService INSTANCE = new ContactService();
 	}
 	

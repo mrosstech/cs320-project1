@@ -26,6 +26,17 @@ public class Task {
 		this.description = validateDescription(thisDescription);
 	}
 	
+	public String getDescription() {
+		return this.description;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public String getID() {
+		return this.id;
+	}
 	public String validateName(String thisName) {
 		if (thisName == null) {
 			thisName = "";
