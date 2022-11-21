@@ -1,6 +1,8 @@
 package com.snhu.cs320project1;
 
+import java.io.Console;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ContactService {
 	/*
@@ -12,12 +14,8 @@ public class ContactService {
 			Number
 			Address
 	 */
-	private Integer idStart = 0;
-	private Integer id = idStart;
 	
 	private ArrayList<Contact> contactDB = new ArrayList<Contact>() ;
-	
-	
 	
 	
 	private ContactService() {
@@ -32,87 +30,113 @@ public class ContactService {
 		return SingletonHelper.INSTANCE;
 	}
 	
-	public Integer addContact(String firstName, String lastName, String phone, String address) {
-		Contact newContact = new Contact(id.toString(), firstName, lastName, phone, address);
+	
+	public String addContact(String firstName, String lastName, String phone, String address) {
+		String id = generateID();
+		System.out.printf("Generated ID: " + id + "\n");
+		Contact newContact = new Contact(id, firstName, lastName, phone, address);
 		contactDB.add(newContact);
-		this.id++;
-		return this.id - 1;
+		System.out.printf("added object: " + newContact + "\n");
+		return id;
 	}
 	
 	public boolean updateContactFirstName(String ID, String firstName) {
-		Integer numId = Integer.parseInt(ID);
 		Contact tempContact = new Contact();
-		if (numId > this.contactDB.size()) {
-			return false;
+		Integer index = getContactIndexByID(ID);
+		
+		if (index != null) {
+			tempContact = contactDB.get(index);
+			tempContact.setFirstName(firstName);
+			contactDB.set(index, tempContact);
+			return true;
 		}
-		
-		tempContact.setLastName(contactDB.get(numId).getLastName());
-		tempContact.setAddress(contactDB.get(numId).getAddress());
-		tempContact.setPhone(contactDB.get(numId).getPhone());
-		tempContact.setFirstName(firstName);
-		
-		contactDB.set(numId, tempContact);
-		return true;
+		return false;
 	}
 	
 	public boolean updateContactLastName(String ID, String lastName) {
-		Integer numId = Integer.parseInt(ID);
 		Contact tempContact = new Contact();
-		if (numId > this.contactDB.size()) {
-			return false;
+		Integer index = getContactIndexByID(ID);
+		
+		if (index != null) {
+			tempContact = contactDB.get(index);
+			tempContact.setLastName(lastName);
+			contactDB.set(index, tempContact);
+			return true;
 		}
-		
-		tempContact.setFirstName(contactDB.get(numId).getFirstName());
-		tempContact.setAddress(contactDB.get(numId).getAddress());
-		tempContact.setPhone(contactDB.get(numId).getPhone());
-		tempContact.setLastName(lastName);
-		
-		contactDB.set(numId, tempContact);
-		return true;
+		return false;
 	}
 	
 	public boolean updateContactPhone(String ID, String phone) {
-		Integer numId = Integer.parseInt(ID);
 		Contact tempContact = new Contact();
-		if (numId > this.contactDB.size()) {
-			return false;
+		Integer index = getContactIndexByID(ID);
+		
+		if (index != null) {
+			tempContact = contactDB.get(index);
+			tempContact.setPhone(phone);
+			contactDB.set(index, tempContact);
+			return true;
 		}
-		
-		tempContact.setLastName(contactDB.get(numId).getLastName());
-		tempContact.setAddress(contactDB.get(numId).getAddress());
-		tempContact.setFirstName(contactDB.get(numId).getFirstName());
-		tempContact.setPhone(phone);
-		
-		contactDB.set(numId, tempContact);
-		return true;
+		return false;
 	}
 	
 	public boolean updateContactAddress(String ID, String address) {
-		Integer numId = Integer.parseInt(ID);
 		Contact tempContact = new Contact();
-		if (numId > this.contactDB.size()) {
-			return false;
+		Integer index = getContactIndexByID(ID);
+		
+		if (index != null) {
+			tempContact = contactDB.get(index);
+			tempContact.setAddress(address);
+			contactDB.set(index, tempContact);
+			return true;
 		}
-		
-		tempContact.setLastName(contactDB.get(numId).getLastName());
-		tempContact.setFirstName(contactDB.get(numId).getFirstName());
-		tempContact.setPhone(contactDB.get(numId).getPhone());
-		tempContact.setAddress(address);
-		
-		contactDB.set(numId, tempContact);
-		return true;
+		return false;
+
 	}
 	public boolean deleteContact(String ID) {
-		Integer numId = Integer.parseInt(ID);
-		if(numId > this.contactDB.size()) {
-			return false;
+		Integer index = getContactIndexByID(ID);
+		if (index != null) {
+			contactDB.remove(index.intValue());
+			return true;
 		}
-		contactDB.remove(numId);
-		return true;
+		return false;
+	}
+	public Contact getContactById(String id) {
+		Integer index = getContactIndexByID(id);
+		if (index != null) {
+			return contactDB.get(index.intValue());
+		}
+		return null;
 	}
 	
-	public Contact getContactById(String ID) {
-		return contactDB.get(Integer.parseInt(ID));
+	private Integer getContactIndexByID(String id) {
+		for (Integer i = 0; i < contactDB.size(); i++) {
+			System.out.printf("Searching for id: " + id + " at index " + i + "\n");
+			System.out.printf("Comparing: " + id + " with: " + contactDB.get(i.intValue()).getID() + "\n");
+			if (contactDB.get(i).getID() == id) {
+				System.out.printf("Found id: " + id + " at index " + i + "\n");
+				return i;
+			}
+		}
+		return null;
+	}
+	
+	public static String generateID() {
+		
+		/* From https://www.baeldung.com/java-random-string */
+		String id = "";
+		Random random = new Random();
+		int leftLimit = 48; // numeral '0'
+	    int rightLimit = 122; // letter 'z'
+	    int targetStringLength = 10;
+	    
+	    
+	    id = random.ints(leftLimit, rightLimit + 1)
+	      .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+	      .limit(targetStringLength)
+	      .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+	      .toString();
+	    
+		return id;
 	}
 	
 }

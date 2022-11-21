@@ -29,10 +29,20 @@ public class TaskService {
 		return SingletonHelper.INSTANCE;
 	}
 	
-	public void addTask(String name, String description) {
-		taskDB.add(new Task(generateID(), name, description));
+	/* Adds a new task
+	 *   Inputs: name, description
+	 *   Returns: id of created task
+	 */
+	public String addTask(String name, String description) {
+		String id = generateID();
+		taskDB.add(new Task(id, name, description));
+		return id;
 	}
 	
+	/* Deletes an existing task
+	 *   Inputs: id of an existing task
+	 *   Returns: None
+	 */
 	public void deleteTask(String id) {
 		Integer index = getTaskIndexByID(id);
 		if (index != null) {
@@ -40,6 +50,11 @@ public class TaskService {
 		}
 	}
 	
+	/* Gets a task given a valid ID
+	 *   Inputs: id of an existing task
+	 *   Returns: Task object or null if no
+	 *   task is found
+	 */
 	public Task getTaskById(String id) {
 		Integer index = getTaskIndexByID(id);
 		if (index != null) {
@@ -48,6 +63,11 @@ public class TaskService {
 		return null;
 	}
 	
+	/* Updates the name field of an existing Task object
+	 *   Inputs: id of an existing task, new name field
+	 *   Returns: Updated task object or null if no task was
+	 *   found with that id.
+	 */
 	public Task updateTaskName(String id, String name) {
 		Integer index = getTaskIndexByID(id);
 		if (index != null) {
@@ -60,6 +80,11 @@ public class TaskService {
 		return null;
 	}
 	
+	/* Updates the description field of an existing Task object
+	 *   Inputs: id of an existing task, new description field
+	 *   Returns: Updated ask object or null if no task was
+	 *   found with that id.
+	 */
 	public Task updateTaskDescription(String id, String description) {
 		Integer index = getTaskIndexByID(id);
 		if (index != null) {
@@ -72,6 +97,12 @@ public class TaskService {
 		return null;
 	}
 	
+	/* Returns the index of a task in the DB given a
+	 * valid task ID
+	 *   Inputs: id of an existing task
+	 *   Returns: index of the task in the DB or null
+	 *   if no valid task was found.
+	 */
 	private Integer getTaskIndexByID(String id) {
 		for (Integer i = 0; i < taskDB.size(); i++) {
 			if (taskDB.get(i).getID() == id) {
@@ -80,7 +111,12 @@ public class TaskService {
 		}
 		return null;
 	}
-	private String generateID() {
+	
+	/* Generates a random 10 character ID
+	 *   Inputs: none
+	 *   Returns: 10 character ID.
+	 */
+	public static String generateID() {
 		
 		/* From https://www.baeldung.com/java-random-string */
 		String id = "";

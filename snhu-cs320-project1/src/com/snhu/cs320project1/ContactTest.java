@@ -7,10 +7,6 @@ import org.junit.Test;
 public class ContactTest {
 	Contact TestContact = new Contact("001", "Michael", "Ross", "4 Bray Ave", "555-555-5555");
 	
-	@Test
-	public void testUniqueID() {
-		// TODO: Maybe move this to the Contact Service test suite
-	}
 	
 	@Test
 	public void testFirstNameLength() {

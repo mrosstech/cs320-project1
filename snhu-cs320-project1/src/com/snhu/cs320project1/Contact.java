@@ -1,13 +1,9 @@
 package com.snhu.cs320project1;
 
 public class Contact {
-	/*
-		TODO: The contact object shall have a required unique contact ID string that cannot be longer than 10 characters. The contact ID shall not be null and shall not be updatable.
-		TODO: The contact object shall have a required firstName String field that cannot be longer than 10 characters. The firstName field shall not be null.
-		TODO: The contact object shall have a required lastName String field that cannot be longer than 10 characters. The lastName field shall not be null.
-		TODO: The contact object shall have a required phone String field that must be exactly 10 digits. The phone field shall not be null.
-		TODO: The contact object shall have a required address field that must be no longer than 30 characters. The address field shall not be null.
-	*/
+
+	
+	// Initialize the private members of the class.
 	private String id;
 	private String firstName;
 	private String lastName;
@@ -17,6 +13,7 @@ public class Contact {
 	
 	// Class constructors
 	public Contact(String thisId, String thisFirstName, String thisLastName, String thisPhone, String thisAddress) {
+		this.id = thisId;
 		this.setFirstName(thisFirstName);
 		this.setLastName(thisLastName);
 		this.setPhone(thisPhone);
@@ -31,29 +28,9 @@ public class Contact {
 		this.address = "";
 	}
 	
-	private boolean checkId(String thisId) {
-		
-		return false;
-	}
-	
-	private boolean checkFirstName(String thisId) {
-		
-		return false;
-	}
-	
-	private boolean checkLastName(String thisId) {
-		
-		return false;
-	}
-	private boolean checkPhone(String thisId) {
-		
-		return false;
-	}
-	private boolean checkAddress(String thisId) {
-		
-		return false;
-	}
-	
+	// Sets the first name of a contact object.  Expects:
+	//	firstName as a String.
+	// No outputs
 	public void setFirstName(String firstName) {
 		if (firstName == null) {
 			firstName = " ";
@@ -61,6 +38,9 @@ public class Contact {
 		this.firstName = firstName.substring(0,Math.min(firstName.length(), 10));
 	}
 	
+	// Sets the last name of a contact object.  Expects:
+	//	lastName as a String.
+	// No outputs
 	public void setLastName(String lastName) {
 		if (lastName == null) {
 			lastName = "";
@@ -68,6 +48,9 @@ public class Contact {
 		this.lastName = lastName.substring(0,Math.min(lastName.length(), 10));;
 	}
 	
+	// Sets the phone number of a contact object.  Expects:
+	// 	phone as a string
+	// No outputs.
 	public void setPhone(String phone) {
 		if (phone == null) {
 			phone = "";
@@ -81,6 +64,9 @@ public class Contact {
 		}
 	}
 	
+	// Sets the address of a contact object. Expects:
+	// 	address as a string
+	// No outputs.
 	public void setAddress(String address) {
 		if (address == null) {
 			address = "";
@@ -88,26 +74,34 @@ public class Contact {
 		this.address = address.substring(0, Math.min(address.length(), 30));
 	}
 	
+	// Returns the first name of a contact object.
 	public String getFirstName() {
 		return this.firstName;
 	}
 	
+	//  Returns the last name of a contact object.
 	public String getLastName() {
 		return this.lastName;
 	}
 	
+	// Returns the phone number of a contact object.
 	public String getPhone() {
 		return this.phone;
 	}
 	
+	// Returns the address of a contact object.
 	public String getAddress() {
 		return this.address;
 	}
 	
+	// Returns the ID of a contact object.
 	public String getID() {
 		return this.id;
 	}
 	
+	// Pads a string to a specific length:
+	//  n - the length desired
+	//  s - the original string
 	private String padRight(String s, int n) {
 		return String.format("%1$" + n + "s", s).replace(" ", "*");
 	}
