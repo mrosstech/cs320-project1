@@ -77,6 +77,18 @@ public class AppointmentService {
 	}	
 	
 	
+	/* Gets an appointment given a valid ID
+	 *   Inputs: id of an existing appointment
+	 *   Returns: Appointment object or null if no
+	 *   appointment is found
+	 */
+	public Appointment getAppointmentById(String id) {
+		Integer index = getAppointmentIndexByID(id);
+		if (index != null) {
+			return appointmentDB.get(index.intValue());
+		}
+		return null;
+	}	
 	
 	
 	
