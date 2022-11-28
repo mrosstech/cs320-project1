@@ -27,7 +27,7 @@ public class Appointment {
 		return this.description;
 	}
 	
-	public String getId() {
+	public String getID() {
 		return this.id;
 	}
 	
@@ -62,11 +62,11 @@ public class Appointment {
 	
 	public String validateId(String newId) {
 		if (newId == null) {
-			newId = AppointmentService.generateId();
+			newId = AppointmentService.generateID();
 		}
 		
 		if (newId.length() > 10) {
-			newId = AppointmentService.generateId();
+			newId = AppointmentService.generateID();
 		}
 		return newId;
 	}
