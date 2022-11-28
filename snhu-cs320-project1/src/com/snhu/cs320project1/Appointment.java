@@ -14,11 +14,18 @@ public class Appointment {
 	private String description;
 	
 	
+	public Appointment() {
+		this.id = validateId(null);
+		this.date = validateDate(null);
+		this.description = validateDescription(null);
+	}
+	
 	public Appointment(String newId, Date newDate, String newDescription) {
 		this.id = validateId(newId);
 		this.date = validateDate(newDate);
 		this.description = validateDescription(newDescription);
 	}
+	
 	public Date getDate() {
 		return this.date;
 	}
