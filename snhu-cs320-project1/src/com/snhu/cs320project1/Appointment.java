@@ -13,39 +13,53 @@ public class Appointment {
 	private Date date;
 	private String description;
 	
-	
+	// Default constructor
 	public Appointment() {
 		this.id = validateId(null);
 		this.date = validateDate(null);
 		this.description = validateDescription(null);
 	}
 	
+	// Overloaded constructor
 	public Appointment(String newId, Date newDate, String newDescription) {
 		this.id = validateId(newId);
 		this.date = validateDate(newDate);
 		this.description = validateDescription(newDescription);
 	}
 	
+	// Returns the date of the appointment.
 	public Date getDate() {
 		return this.date;
 	}
 	
+	// Returns the description of the appointment
 	public String getDescription() {
 		return this.description;
 	}
 	
+	// Returns the ID of the appointment
 	public String getID() {
 		return this.id;
 	}
 	
+	// Sets the value of the Date.
+	//   Expects a date value
+	//   Returns nothing
 	public void setDate(Date newDate) {
 		this.date = validateDate(newDate);
 	}
 	
+	
+	// Sets the description of the Appointment object
+	//   Expects a string
+	//   Returns nothing.
 	public void setDescription(String newDescription) {
 		this.description = validateDescription(newDescription);
 	}
 	
+	// Validates the date provided.
+	//   Expects: Date value
+	//   Returns: Validated date value
 	public Date validateDate(Date newDate) {
 		Date today = new Date();
 		if (newDate == null) {
@@ -57,6 +71,9 @@ public class Appointment {
 		return newDate;
 	}
 	
+	// Validates the description provided.
+	//   Expects: Description
+	//   Returns: Validated description value
 	public String validateDescription(String newDescription) {
 		if (newDescription == null) {
 			newDescription = "";
@@ -67,6 +84,10 @@ public class Appointment {
 		return newDescription;
 	}
 	
+	// Validates the ID provided.
+	//    Expects: ID string
+	//    Returns: Validated ID string.  Generates new ID if a blank, null or invalid 
+	//             id is provided.
 	public String validateId(String newId) {
 		if (newId == null) {
 			newId = AppointmentService.generateID();

@@ -13,7 +13,7 @@ public class AppointmentService {
 	
 	
 	private AppointmentService() {
-		// This class needs to be a singleton to ensure that the IDs for the created contacts are unique.
+		// This class needs to be a singleton to ensure that the IDs for the created appointments are unique.
 	}
 	
 	private static class SingletonHelper {
